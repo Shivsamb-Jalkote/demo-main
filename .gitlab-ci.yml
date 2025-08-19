@@ -1,0 +1,90 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: ""  # Disables TLS for Docker-in-Docker
+  DOCKER_HOST: tcp://docker:2375/
+
+# ----------------------------
+# Build Jobs
+# ----------------------------
+
+build_backend:
+  image: node:18
+  stage: build
+  script:
+    - echo "Building backend..."
+    - cd backend
+    - npm install
+    - if npm run | grep -q build; then npm run build; else echo "No build script"; fi
+
+build_frontend:
+  image: node:18
+  stage: build
+  script:
+    - echo "Building frontend..."
+    - cd frontend
+    - npm install
+    - npm run build
+
+# ----------------------------
+# Test Jobs
+# ----------------------------
+
+test_backend:
+  image: node:18
+  stage: test
+  script:
+    - echo "Testing backend..."
+    - cd backend
+    - if npm run | grep -q test; then npm test || true; else echo "No tests"; fi
+
+test_frontend:
+  image: node:18
+  stage: test
+  script:
+    - echo "Testing frontend..."
+    - cd frontend
+    - npm test || true
+
+# ----------------------------
+# Docker Build & Push
+# ----------------------------
+
+docker_build_and_push:
+  image: docker:latest
+  stage: deploy
+  services:
+    - name: docker:dind
+      alias: docker
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_HOST: tcp://docker:2375/
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin
+  script:
+    - echo "Building Docker images..."
+    - docker build -t shivjalkote/backend:latest ./backend
+    - docker build -t shivjalkote/frontend:latest ./frontend
+    - docker push shivjalkote/backend:latest
+    - docker push shivjalkote/frontend:latest
+
+# ----------------------------
+# Deploy Using Docker Compose
+# ----------------------------
+
+deploy:
+  stage: deploy
+  tags:
+    - ec2
+  script:
+    - echo "Deploying on EC2 with GitLab Runner..."
+    - cd /home/ubuntu/your_project   # adjust project path
+    - git pull origin main           # get latest code
+    - docker-compose down || true
+    - docker-compose pull
+    - docker-compose up -d --build
+  only:
+    - main

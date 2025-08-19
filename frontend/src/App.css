@@ -1,0 +1,78 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.app-container {
+  padding: 2rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+.user-form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 250px;
+  margin-right: 10px;
+}
+
+.submit-btn {
+  background-color: #27ae60;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.init-buttons {
+  margin-top: 1rem;
+}
+
+.db-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.table-btn {
+  background-color: #f39c12;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.user-list {
+  margin-top: 2rem;
+}
+
+table {
+  margin: 0 auto;
+  width: 60%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 0.75rem;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #555;
+}
