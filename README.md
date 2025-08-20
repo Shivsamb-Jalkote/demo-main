@@ -7,9 +7,6 @@ git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/Shivsamb-Jalkote-group/demo/-/settings/integrations)
 
 ## Project status
 
@@ -78,8 +75,3 @@ Before running the project, make sure you have the following installed:
 
    This will take you to the ReactJS application interface where you can interact with the project.
 
-## Usage
-
-This example serves as a beginner-friendly resource to learn about full-stack Docker containerization in a practical application. It provides a simplified implementation of a full-stack application using React.js, Node.js, and MySQL, all orchestrated with Docker Compose.
->>>>>>> 77cc8864 (project)
->>>>>>> e6f5f3eb (first commit)
