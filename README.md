@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 ```
 cd existing_repo
@@ -7,10 +6,6 @@ git branch -M main
 git push -uf origin main
 ```
 
-
-## Project status
-
-<<<<<<< HEAD
 # Assignment-Project
 =======
 # Docker MySQL Node.js React.js App
